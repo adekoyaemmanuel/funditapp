@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		{% block title %}<title>Onboarding</title> {% endblock title %}
+		<meta name='viewport' content='width=device-width,initial-scale=1,shrink-to-fit=no'>
+		<meta charset='utf-8'>	  
+		<link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel='stylesheet' type='text/css'>
+		{% block style %}
+        <style type="text/css">
+		
+        body{
+            background-color: #FBF2F2;
+            min-height: 50px;
+        }
+
+        #banner{
+            background-image:url("/static/images/bannerimage.png");
+            background-repeat: none;
+            background-size: cover;
+            width: 1120.06px;
+            min-height: 650px;
+            margin-top: 35px;
+
+        }
+
+        #bannerimage{
+            position: absolute;
+            top: 120px;
+            left: 750px;
+            
+        }
+
+        #bannerimage1{
+            position: absolute;
+            top:200px;
+            left:980px;
+        }
+
+        #bannertext{
+            color: white;
+            position:relative;
+            top:130px;
+            left: 100px;
+        }
+
+        .services{
+            margin: 0px;
+            padding: 70px;
+            min-height: 40px;
+        }
+
+        #serviceone{
+            background-image: url('/static/images/mirrorleft.png');
+            background-size: cover;
+            background-repeat: none;
+            
+        }
+        #servicetwo{
+            background-image: url('/static/images/mirrorcenter.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: none;
+            
+        }
+        #servicethree{
+            background-image: url("/static/images/mirror.png");
+            background-size: cover;
+            background-repeat: none;
+        }
+        #download{
+            position:relative;
+            left:450px;
+        }
+
+        #shape{
+            background-image: url("/static/images/Shape.png");
+            background-size: 100%;
+            background-position: left;
+            background-repeat: no-repeat;
+            min-height: 120px;
+            margin-top: 100px;
+
+        }
+
+        #footerdesign{
+            background-color:white
+        }
+
+        #newsletters{
+            background-color: white;
+            border: 2px solid whitesmoke;
+            border-radius: 3px;
+            position: relative;
+            top:-65px;
+            width:80%;
+            margin:auto
+        }
+
+        a{
+              color:black;
+              text-decoration:none; 
+            }
+
+        input, select, a:hover{
+            color:#3ab26e;
+            border-color: #3ab26e !important;
+            border-radius: 10px !important;
+            }
+
+		</style>
+        {% endblock style %}
+	</head>
+	<body>
+		<div class="container">
+			<div class="row align-items-center justify-content-center">
+				<!-- header section -->
+                <div class="col-md">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary background-color-white">
+                        <div>
+                            <a class="navbar-brand" href="#">
+                                <img src="/static/images/logo.png" width="150" height="100%" alt="">
+                            </a>
+                        </div>
+                       
+                        {% block navarea %}
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                      
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-dark mx-5">
+                            <li class="nav-item">
+                                <a class="nav-link active mx-4"style="color: black;" href="/">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mx-4" style="color: black;"href="/about/">About Us</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mx-4" style="color: black;" href="/login">Expenses</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mx-4" style="color: black; margin-right:77px;" href="/login">Budgets</a>
+                            </li>
+                        </ul>
+                        {% endblock navarea %}
+                        {% block navbutton %}
+                        <form class="form-inline my-2  mx-5 my-lg-0">
+                            <a class="btn btn-success my-2 mx-5 my-sm-0 col-7" href="/register">Sign Up</a>
+                        </form>
+                        {% endblock navbutton %}
+                        </div>
+                    </nav>
+                </div>
+			</div>
+            {% block content %}
+            <!-- banner section -->
+            <div class="row" id="banner">
+                <div class="col-md-5" id="bannertext">
+                        <h2>Empower Your Journey To Financial Freedom</h2>
+                        <br>
+                        <h5>Transform the way you manage your money and embark on a Journey towards a more secure and prosperous future</h5>
+                        <a href="/register/" class="btn btn-light text-success mt-3">Get Started</a>
+                </div>
+                <div class="col-md-7 d-none d-lg-block ban">
+                    <span id="bannerimage"><img src="/static/images/Body.png" alt="" ></span> 
+                    <span id="bannerimage1"><img src="/static/images/Body1.png" alt=""></span>
+                </div>
+            </div>
+        <!-- banner section ends here -->
+            <div class="row">
+                <div class="col-md mt-5">
+                    <h2>Enjoy Our </h2>
+                    <h2>Excellent Serivce</h2>
+                </div>
+            </div>
+            <br><br>
+            <div class="row justify-content-between">
+                <div class="col-md-4 services text-center" id="serviceone">
+                        <p><img src="/static/images/chart.png" alt=""></p>
+                        <h4>Intelligent Budgeting</h4>
+                        <p style="text-align:left;">Tailor your budget to your lifestyle with easy-to-use tools for setting and managing financial goals.</p>
+                </div>
+                <div class="col-md-4 services text-center" id="servicetwo">
+                    <p><img src="/static/images/account.png" alt=""></p>
+                    <h4 class="text-light">Real Time Expenses Insight</h4>
+                    <pstyle="text-align:left;">Stay informed with instant updates on your spending patterns and receive personalized insights for smarter financial decision</p>
+                </div>
+                <div class="col-md-4 services" id="servicethree" style="text-align: center;">
+                    <p><img src="/static/images/settings.png" alt="" ></p>
+                    <h4>Bank Level Security</h4>
+                    <p style="text-align:right">Trust in the security of your financial data with state-of-the-art measures to safeguard your privacy</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-12 mt-5" style="background-image: url(/static/images/Rectangle.png); background-size: cover; background-repeat: none">
+                    <img src="/static/images/download.png" alt="" id="download">
+                </div>
+            </div>
+            <!-- Testimonials Section -->
+            <div class="row">
+                <div class="col-md-12 mt-5">
+                    <h4>What Our Clients Say About Us</h4>
+                </div>
+                <div class="col-md py-3">
+                    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="row justify-content-center w-100">
+                                    <div class="col-md-4 mt-4 p-5" style="background-color:#3ab26e;">
+                                        <p>Fundit has truly transformed the way I manage my finances. The real-time insights and educational resources have been invaluable!"</p>
+                                        <hr style="color:black">
+                                        <div class="float-start">
+                                            <img src="/static/images/client.png" alt="">
+                                        </div>
+                                        <br><p >Ayo Badmus</p>
+                                            <p>06/12/2023</p>
+                                    </div>
+                                    <div class="col-md-4 p-5 mt-4">
+                                        <p>As a freelancer, Fundit's flexibility and budgeting tools have made a significant impact on my financial stability.</p>
+                                        <hr style="color:#3ab26e;">
+                                        <div class="float-start">
+                                            <img src="/static/images/Ellipse 233.png" alt="">
+                                        </div>
+                                        <br><p >Emmanuel Adekoya</p>
+                                            <p>06/12/2023</p>
+                                    </div>
+                                    <div class="col-md-4 p-5 mt-4 testimonial">
+                                        <p>As a freelancer, Fundit's flexibility and budgeting tools have made a significant impact on my financial stability.</p>
+                                        <hr style="color:#3ab26e;">
+                                        <div class="float-start">
+                                            <img src="/static/images/Ellipse 234.png" alt="">
+                                        </div>
+                                        <br><p >Stephanie Nicole</p>
+                                            <p>06/12/2023</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                            <div class="row justify-content-around w-100">
+                                <div class="col-md-4 mt-4 p-5" style="background-color:#3ab26e;">
+                                    <p>Fundit has truly transformed the way I manage my finances. The real-time insights and educational resources have been invaluable!"</p>
+                                    <hr style="color:black">
+                                    <div class="float-start">
+                                        <img src="/static/images/client.png" alt="">
+                                    </div>
+                                    <br><p >Ope Ade</p>
+                                        <p>06/12/2023</p>
+                                </div>
+                                <div class="col-md-4 p-5 mt-4">
+                                    <p>As a freelancer, Fundit's flexibility and budgeting tools have made a significant impact on my financial stability.</p>
+                                    <hr style="color:#3ab26e;">
+                                    <div class="float-start">
+                                        <img src="/static/images/Ellipse 233.png" alt="">
+                                    </div>
+                                    <br><p>Emmanuel Adekoya</p>
+                                        <p>06/12/2023</p>
+                                </div>
+                                <div class="col-md-4 p-5 mt-4 testimonial">
+                                    <p>As a freelancer, Fundit's flexibility and budgeting tools have made a significant impact on my financial stability.</p>
+                                    <hr style="color:#3ab26e;">
+                                    <div class="float-start">
+                                        <img src="/static/images/Ellipse 234.png" alt="">
+                                    </div>
+                                    <br><p>Stephanie Nicole</p>
+                                        <p>06/12/2023</p>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="carousel-item">
+                            <div class="row justify-content-around w-100">
+                                <div class="col-md-4 mt-4 p-5" style="background-color:#3ab26e;">
+                                    <p>Fundit has truly transformed the way I manage my finances. The real-time insights and educational resources have been invaluable!"</p>
+                                    <hr style="color:black">
+                                    <div class="float-start">
+                                        <img src="/static/images/client.png" alt="">
+                                    </div>
+                                    <br><p >Ayo Badmus</p>
+                                        <p>06/12/2023</p>
+                                </div>
+                                <div class="col-md-4 p-5 mt-4">
+                                    <p>As a freelancer, Fundit's flexibility and budgeting tools have made a significant impact on my financial stability.</p>
+                                    <hr style="color:#3ab26e;">
+                                    <div class="float-start">
+                                        <img src="/static/images/Ellipse 233.png" alt="">
+                                    </div>
+                                    <br><p >Emmanuel Adekoya</p>
+                                        <p>06/12/2023</p>
+                                </div>
+                                <div class="col-md-4 p-5 mt-4 testimonial">
+                                    <p>As a freelancer, Fundit's flexibility and budgeting tools have made a significant impact on my financial stability.</p>
+                                    <hr style="color:#3ab26e;">
+                                    <div class="float-start">
+                                        <img src="/static/images/Ellipse 234.png" alt="">
+                                    </div>
+                                    <br><p >Stephanie Nicole</p>
+                                        <p>06/12/2023</p>
+                                </div>
+                            </div>
+                            </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonials Section Ends Here -->
+
+            </div>
+        </div>
+        {% endblock content %}
+            <!-- Footer Section -->
+            <div class="container-fluid">
+                <div class="row" id="shape">
+                    <div class="col-md">
+                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md" id="footerdesign">
+                        <div class="row" id="newsletters">
+                            <div class="col-md-3 py-2 px-5">
+                                <p>Subscribe <br> Newsletters</p>
+                            </div>
+                            <div class="col-md-9 py-3 float-start">
+                                <form action="" class="form form-inline">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <input type="text" placeholder="Enter your email" name="email" class="form-control">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button class="btn btn-success">Subscribe Now</button>
+                                    </div>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div style= "margin-left:50px;">
+                            <span class="px-5"><a href="#">About us</a></span>
+                            <span class="px-5"><a href="#">Expenses</a></span>
+                            <span class="px-5"><a href="#">Budget</a></span>
+                            <span class="px-5"><a href="/register" class="btn btn-success">Get Started</a></span>
+                            <span style= "margin-left:350px;"><img src="/static/images/Facebook.png" alt=""></span>
+                            <span class="px-2"><img src="/static/images/twitter-black.png" alt=""></span>
+                            <span class="px-2"><img src="/static/images/vimeo-black.png" alt=""></span>
+                            <span class="px-2"><img src="/static/images/youtube-black.png" alt=""></span>
+                        </div>
+                            <br>
+                            <hr style= "margin:auto;" width="85%">
+                            <br>
+                        <div style= "margin-left:90px;">
+                            <span>&copy;2024 Fundit, All rights reserved</span>
+                            <span style= "margin-left:760px;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Terms of Service & Privacy Policy</span>
+
+                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Terms and Conditions</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <ol>
+                                            <li>Account Creation and Use</li>
+                                            <p>To use our budget and expense tracker application, you will need to create an account. You agree to provide accurate, complete, and updated registration information. You are solely responsible for any activity that occurs on your account.</p>
+                                        
+                                            <li>Usage of the Application</li>
+                                            <p>You agree to use the application only for lawful purposes and in a manner that does not infringe on the rights of others or interfere with the normal operation of the application. We reserve the right to terminate or restrict your use of the application if you violate these Terms and Conditions.</p>
+                                        
+                                            <li>User Content</li>
+                                            <p>You retain all rights to any content you submit or post through the application. However, by submitting or posting content, you grant us a perpetual, irrevocable, worldwide, non-exclusive, royalty-free, and transferable license to use, copy, modify, distribute, and display such content in any form, medium, or technology now known or later developed.</p>
+                                        
+                                            <li>Privacy</li>
+                                            <p>Your privacy is important to us. Please review our Privacy Policy, which explains how we handle your personal information.</p>
+                                        
+                                        <li>Disclaimer of Warranties</li>
+                                        <p>The application is provided on an "as is" and "as available" basis. We make no representations or warranties of any kind, express or implied, as to the operation of the application or the information, content, materials, or products included in the application.</p>
+                                        
+                                        <li>Limitation of Liability</li>
+                                        <p>In no event will we be liable for any direct, indirect, incidental, special, consequential, or exemplary damages, including but not limited to, damages for loss of profits, goodwill, use, data, or other intangible losses.</p>
+                                        
+                                        <li>Changes to Terms and Conditions</li>
+                                        <p>We reserve the right to modify these Terms and Conditions at any time without notice. Your continued use of the application after any such changes constitutes your acceptance of the new Terms and Conditions.</p>
+                                        
+                                        <li>Governing Law</li>
+                                        <p>These Terms and Conditions are governed by and construed in accordance with the laws of the state in which the company is registered.</p>
+                                        
+                                        <p>Contact Information
+                                        If you have any questions about these Terms and Conditions, please contact us at support@funditapp.com.</p>
+                                        
+                                        <p>Last updated: 12/01/2024</p>
+                                        </ol>
+                                        
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+
+                        </div>
+                            
+                    </div>
+                </div>
+                <!-- footer section ends here -->
+    
+            </div>
+    <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script> 
+    <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script>
+         $(document).ready(function(){
+        $("#agree").click(function(){
+        var state = $("#agree").prop("checked")
+            if(state==true){
+                $("#but").removeAttr("disabled")
+            }
+            else{
+                $("#but").attr("disabled", "disabled");
+            }
+        })
+       })
+    </script>
+	</body>
+</html>

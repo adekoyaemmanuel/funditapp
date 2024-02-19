@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>{% block title %}Dashboard{% endblock %}</title>
+		<meta name='viewport' content='width=device-width,initial-scale=1,shrink-to-fit=no'>
+		<meta charset='utf-8'>	  
+		<link href='/static/vendor/bootstrap/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+        <link rel="icon" href="favicon.ico">
+		<link href="/static/vendor/fa/css/all.min.css" rel="stylesheet" type="text/css"/>
+        {% block customcss %}
+		<style type="text/css">
+			/* div{
+				 border: 2px solid red;
+				
+			} */
+            .menubar{
+                min-height: 300px;
+                background-color: #3ab26e;;
+            }
+
+            .menubar button{
+                margin-bottom:15px;
+                border:0px !important;
+            }
+
+            a{
+              color:black;
+              text-decoration:none; 
+            }
+            input, select, a:hover{
+            color:#3ab26e;
+            border-color: #3ab26e !important;
+            border-radius: 10px !important;
+            }
+            /* #settings{
+                position: relative;
+                top: 280px;
+            } */
+
+            #shape{
+            background-image: url("/static/images/Shape.png");
+            background-size: 100%;
+            background-position: left;
+            background-repeat: no-repeat;
+            min-height: 120px;
+            margin-top: 100px;
+
+        }
+
+        #footerdesign{
+            background-color:white
+        }
+
+        #newsletters{
+            background-color: white;
+            border: 2px solid whitesmoke;
+            border-radius: 3px;
+            position: relative;
+            top:-65px;
+            width:80%;
+            margin:auto
+        }
+		</style>
+        {% endblock %}
+	</head>
+	<body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    {% block navarea %}
+                    <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary background-color-white">
+                        <div style="margin-right: 800px;">
+                            <a class="navbar-brand" href="#">
+                                <img src="/static/images/logo.png" width="130" height="80%" alt="">
+                            </a>
+                        </div>
+                        <div class="nav-item dropdown text-end">
+                            <div class="dropdown text-end">
+                            <a class="btn dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {% if deets and deets.user_pix !=None%}
+                                <img src="/static/profile/{{ deets.user_pix }}" alt="mdo" width="32" height="32" class="rounded-circle">
+                                {% else %}
+                                <img src="/static/images/mdo.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
+                                {% endif %}{{ deets.user_lname }} {{ deets.user_fname }}
+                                </a>
+                            
+                            <ul class="dropdown-menu text-small">
+                                <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                                <li><a class="dropdown-item" href="/changedp">Upload DP</a></li>
+                                <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                              </ul>
+                            </div>
+                        </div>
+                    </nav>
+                    {% endblock %}
+                </div>
+                <div col-md>
+                    <h3 class="m-2" style="color:#3ab26e"><i>Welcome - {{ deets.user_lname }}</i></h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="menubar p-3" style="border-top-right-radius:15px; border-bottom-right-radius: 15px;">
+                        <a href="/dashboard" class="btn"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;&nbsp;Dashboard</a>
+                        <a href="/budget" class="btn "><i class="fa-regular fa-credit-card" aria-hidden="true"></i>&nbsp;&nbsp;Budget</a>
+                        <a href="/dashboard" class="btn"><i class="fa fa-credit-card" aria-hidden="true"></i>&nbsp;&nbsp;Expense</a>
+                        <a href="/report/" class="btn "><i class="fa-regular fa-credit-card" aria-hidden="true"></i>&nbsp;&nbsp;Reports</a>
+                        <div id="settings" class="nav-item dropdown">
+                            <div class="dropdown ">
+                            <a class="btn dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-sharp fa-solid fa-gear"></i>&nbsp;&nbsp;Settings</a>
+                            <ul class="dropdown-menu text-small">
+                                <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                                <li><a class="dropdown-item" href="/changedp">Upload DP</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                              </ul>
+                            </div>
+                            <a href="/logout" class="btn"><i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp;&nbsp;Log Out</a>
+                        </div>
+                    
+                    </div>
+                    <br>
+                    {% block mini %}
+                    <div>
+                        <h2>Budget</h2>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Budget Name</th>
+                                    <th>Budget Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for budget in budgets %}
+                            <tr>
+                                <td>{{ budget.budget_name }}</td>
+                                <td>{{ budget.current_income }}</td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <a href="/budgetreport/" style="color:#3ab26e; text-decoration:underline;">see more</a>
+                    </div>
+                    {% endblock %}
+                   
+
+                </div>
+                <div class="col-md-10">
+                    {% set m=get_flashed_messages(with_categories=True) %}
+                        {% if m %}
+                        {% for cat,msg in m %}
+                            {% if cat == "error" %}
+                            <div class="alert alert-danger noround">{{ msg }}</div>
+                            {% else %}
+                            <div class="alert alert-info noround">{{ msg }}</div>
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h4 class="text-center">{% block pagetitle %}Add an Expense{% endblock %}</h4>
+                        </div>
+                        
+                        {% block buttons %}
+                        <div class="col-md-2">
+                            <a type="button" href="/report/" class="btn btn-success">Reports</a>
+                        </div>
+                        {% endblock %}
+                    </div>
+
+                    {% block content %}
+                    <form action="" method="post" class="form" id="expense-form">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <label for="budgetname" class="form-label">From Budget</label>
+                                <select name="budgetname" id="budgetname" class="form-control">
+                                    <option value="">select...</option>
+                                    {% for budget in budgetss %}
+                                    <option value="{{ budget.budget_id }}">{{ budget.budget_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-5">
+                                <label for="itemname" class="form-label">Item Name</label>
+                                <select name="itemname" id="itemname" class="form-control">
+                                    
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="amt" class="form-label">Expense Amount</label>
+                                <input type="text" name="amt" id="amt" value="" class="form-control">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="desc" class="form-label">Expense Description</label>
+                                <input type="text" name="desc" id="desc" value="" class="form-control">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="dat" class="form-label">Expense Date</label>
+                                <input type="date" name="dat" id="dat" value="" class="form-control">
+                            </div>
+                        </div>
+                        <button class="btn m-2 btn-success px-3" type="submit">Add Expense</button>
+                    </form>
+                    <br>
+                    <div>
+                        <h2>Expenses</h2>
+                        <table id="my-table" class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th>S/N</th>
+                                <th>From Budget</th>
+                                <th>Expense Item</th>
+                                <th>Expense Item Category</th>
+                                <th>Expense Description</th>
+                                <th>Expense Amount</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            {% for expense in expenses %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ expense.expenseitem_deets.budget.budget_name }}</td>
+                                <td>{{ expense.expenseitem_deets.item_name }}</td>
+                                <td>{{ expense.expenseitem_deets.catego.cat_name }}</td>
+                                <td>{{ expense.expense_desc}}</td>
+                                <td>{{ expense.expense_amount}}</td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                          </table>
+                          <a href="/report/" style="color:#3ab26e; text-decoration:underline;">see more</a>
+                    </div>
+                    {% endblock %}
+                </div>
+            </div>
+
+            {% block table %}
+            <div class="row">
+                <div class="col-md-12">
+
+                </div>
+            </div>
+            {% endblock %}
+        </div>
+        
+
+        <!--footer starts here  -->
+        <div class="container-fluid">
+            <div class="row" id="shape">
+                <div class="col-md">
+                    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md" id="footerdesign">
+                    <div class="row" id="newsletters">
+                        <div class="col-md-3 py-2 px-5">
+                            <p>Subscribe <br> Newsletters</p>
+                        </div>
+                        <div class="col-md-9 py-3 float-start">
+                            <form action="" class="form form-inline">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <input type="text" placeholder="Enter your email" name="email" class="form-control">
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn btn-success">Subscribe Now</button>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div style= "margin-left:50px;">
+                        <span class="px-5"><a href="#">About us</a></span>
+                        <span class="px-5"><a href="#">Expenses</a></span>
+                        <span class="px-5"><a href="#">Budget</a></span>
+                        <span class="px-5"><button class="btn btn-success">Get Started</button></span>
+                        <span style= "margin-left:350px;"><img src="/static/images/Facebook.png" alt=""></span>
+                        <span class="px-2"><img src="/static/images/twitter-black.png" alt=""></span>
+                        <span class="px-2"><img src="/static/images/vimeo-black.png" alt=""></span>
+                        <span class="px-2"><img src="/static/images/youtube-black.png" alt=""></span>
+                    </div>
+                        <br>
+                        <hr style= "margin:auto;" width="85%">
+                        <br>
+                    <div style= "margin-left:90px;">
+                        <span>&copy;2024 Fundit, All rights reserved</span>
+                        <span style= "margin-left:760px;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Terms of Service & Privacy Policy </span>
+
+                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Terms and Conditions</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <ol>
+                                        <li>Account Creation and Use</li>
+                                        <p>To use our budget and expense tracker application, you will need to create an account. You agree to provide accurate, complete, and updated registration information. You are solely responsible for any activity that occurs on your account.</p>
+                                    
+                                        <li>Usage of the Application</li>
+                                        <p>You agree to use the application only for lawful purposes and in a manner that does not infringe on the rights of others or interfere with the normal operation of the application. We reserve the right to terminate or restrict your use of the application if you violate these Terms and Conditions.</p>
+                                    
+                                        <li>User Content</li>
+                                        <p>You retain all rights to any content you submit or post through the application. However, by submitting or posting content, you grant us a perpetual, irrevocable, worldwide, non-exclusive, royalty-free, and transferable license to use, copy, modify, distribute, and display such content in any form, medium, or technology now known or later developed.</p>
+                                    
+                                        <li>Privacy</li>
+                                        <p>Your privacy is important to us. Please review our Privacy Policy, which explains how we handle your personal information.</p>
+                                    
+                                    <li>Disclaimer of Warranties</li>
+                                    <p>The application is provided on an "as is" and "as available" basis. We make no representations or warranties of any kind, express or implied, as to the operation of the application or the information, content, materials, or products included in the application.</p>
+                                    
+                                    <li>Limitation of Liability</li>
+                                    <p>In no event will we be liable for any direct, indirect, incidental, special, consequential, or exemplary damages, including but not limited to, damages for loss of profits, goodwill, use, data, or other intangible losses.</p>
+                                    
+                                    <li>Changes to Terms and Conditions</li>
+                                    <p>We reserve the right to modify these Terms and Conditions at any time without notice. Your continued use of the application after any such changes constitutes your acceptance of the new Terms and Conditions.</p>
+                                    
+                                    <li>Governing Law</li>
+                                    <p>These Terms and Conditions are governed by and construed in accordance with the laws of the state in which the company is registered.</p>
+                                    
+                                    <p>Contact Information
+                                    If you have any questions about these Terms and Conditions, please contact us at support@funditapp.com.</p>
+                                    
+                                    <p>Last updated: 12/01/2024</p>
+                                    </ol>
+                                    
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                    </div>
+                        
+                </div>
+            </div>
+            <!-- footer section ends here -->
+        </div>
+
+        <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script> 
+        <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <script>
+        
+        $(document).ready(function(){
+        $("#budgetname").change(function(){
+            var budgetId = $(this).val()
+            var csrf = '{{csrf_token()}}'
+            
+
+            $.ajax({
+                url: '/budget/items/',
+                type: 'POST',
+                data: {"budgetId":budgetId, "csrf_token":csrf},
+                beforeSend: function() {
+                    $("#itemname").html('')
+                },
+                success: function(resp){
+                    $('#itemname').append(`<option value=''> select item </option>`)
+                    for (let index = 0; index < resp.length; index++) {
+                        $('#itemname').append(`<option value='${resp[index].item_id}'> ${resp[index].item_name} </option>`)
+                    }
+                }
+            })
+        })
+    })
+
+        function calculateTotalItemAmount() {
+            const item_amounts = document.getElementsByName('item_amount[]');
+            let total_amount = 0;
+            for (let i = 0; i < item_amounts.length; i++) {
+                const amount = parseFloat(item_amounts[i].value);
+                if (!isNaN(amount)) {
+                total_amount += amount;
+                }
+            }
+            return total_amount;
+            }
+
+
+        const form = document.getElementById('my-form');
+        const item_fields = document.getElementById('item_fields');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(form);
+            formData.append('budget_name', document.getElementById('budget_name').value);
+            formData.append('current_income', document.getElementById('current_income').value);
+            formData.append('start_date', document.getElementById('start_date').value);
+            formData.append('end_date', document.getElementById('end_date').value);
+
+            const total_amount = calculateTotalItemAmount();
+            const current_income = parseFloat(document.getElementById('current_income').value);
+            if (total_amount > current_income) {
+            alert('The total item amount cannot be more than the current income.');
+            return;
+            }
+
+            fetch('/budget/', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                location.reload()
+            });
+
+            });
+
+        document.getElementById('add_item').addEventListener('click', function() {
+        var item_field = document.createElement('div');
+        item_field.classList.add('item_field');
+        item_field.innerHTML = `
+        <div class="col-md-10">
+            <label for="item_name" class="form-label">Item Name</label>
+            <input type="text" name="item_name[]" id="item_name" value="" class="form-control" required>
+        </div>
+        <div class="row">
+        <div class="col-md-3">
+            <label for="item_category" class="form-label">Item Category</label>
+            <select name="item_category[]" id="item_category" class="form-control" required>
+                <option value="" class="form-control">select...</option>
+                {% for cat in category %}
+                <option value="{{ cat.cat_id }}">{{ cat.cat_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label for="item_status" class="form-label">Item Status</label>
+            <select name="item_status[]" id="item_status" class="form-control" required>
+                <option value="" class="form-control">select...</option>
+                <option value="1">Enable</option>
+                <option value="0">Disable</option>  
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label for="item_amount" class="form-label">Item Amount</label>
+            <input type="number" name="item_amount[]" id="item_amount" value="" class="form-control" step="0.01" required>
+        </div>
+        </div>
+    `;
+    item_fields.appendChild(item_field);
+    // console.log(item_count)
+});
+
+    
+
+    </script>
+    </body>
+</html>

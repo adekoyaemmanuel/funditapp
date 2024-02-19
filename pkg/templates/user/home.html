@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Home Page</title>
+		<meta name='viewport' content='width=device-width,initial-scale=1,shrink-to-fit=no'>
+		<meta charset='utf-8'>	  
+		<link href='/static/bootstrap/css/bootstrap.css' rel='stylesheet' type='text/css'>
+        <link rel="icon" href="favicon.ico">
+		<link href="/static/fa/css/all.min.css" rel="stylesheet" type="text/css"/>
+		<style type="text/css">
+			body{
+				box-sizing: 0px;
+				
+			}
+			div{
+				 border: 2px solid red;
+				
+			}
+            .menubar{
+                min-height: 640px;
+                background-color: #CDE2F2;
+            }
+
+            .menubar button{
+                margin-bottom:25px;
+                border:0px !important;
+            }
+
+            #settings{
+                margin-top: 200px;
+            }
+
+		</style>
+	</head>
+	<body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2 menubar">
+                    <div class="mb-5">
+					    <h2>FundIt</h2>
+					</div>
+                    <button class="btn"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;&nbsp;Dashboard</button>
+                    <button class="btn"><i class="fa fa-credit-card" aria-hidden="true"></i>&nbsp;&nbsp;Expenses</button>
+                    <button class="btn "><i class="fa-regular fa-credit-card"></i>&nbsp;&nbsp;Budget</button>
+                    <button class="btn " id="settings"><i class="fa-sharp fa-solid fa-gear"></i>&nbsp;&nbsp;Settings</button>
+                    <button class="btn"><i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp;&nbsp;Log Out</button>
+
+                </div>
+                <div class="col-md-10">
+                <input type="search" name="search" id="searchbox" class="form-control col-2" width="40%">
+                </div>
+            </div>
+        </div>
+	</body>
+</html>

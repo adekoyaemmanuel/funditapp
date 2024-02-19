@@ -1,0 +1,96 @@
+{% extends "user/dashboardlayout.html" %}
+
+{% block title %}Expenses{% endblock %}
+
+<div class="row">
+    <div class="col-md-8">
+        <h4 class="text-center">{% block pagetitle %}Expense Reports{% endblock %}</h4>
+    </div>
+    {% block buttons %}
+    <div class="col-md-2">
+        <a type="button" href="/budgetreport/" class="btn btn-success"> All Budgets</a>
+    </div>
+    <div class="col-md-2">
+        <a type="button" href="/report/" class="btn btn-success">All Expenses</a>
+    </div>
+    {% endblock %}
+</div>
+
+{% block content %} 
+<div>
+    {% set m=get_flashed_messages(with_categories=True) %}
+                {% if m %}
+                {% for cat,msg in m %}
+                    {% if cat == "error" %}
+                    <div class="alert alert-danger noround">{{ msg }}</div>
+                    {% else %}
+                    <div class="alert alert-info noround">{{ msg }}</div>
+                    {% endif %}
+                {% endfor %}
+                {% endif %}
+    <form action="" method="post">
+        <label for="budgetname" class="form-label">Budget Name</label>
+        <select name="budgetname" id="budgetname" class="form-control" required>
+            <option value="">select...</option>
+            {% for budget in budgetss %}
+            <option value="{{ budget.budget_name }}">{{ budget.budget_name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <button type="submit" class="btn btn-success"> submit </button>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    </form>
+    <table id="my-table" class="table table-striped">
+        <thead>
+          <tr>
+            <th>S/N</th>
+            <th>From Budget</th>
+            <th>Expense Item</th>
+            <th>Expense Item Category</th>
+            <th>Expense Description</th>
+            <th>Expense Amount</th>
+            <th>Expense Date</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% if message: %}
+        <p class="alert alert-danger">{{ message }}</p>
+        {% endif %}
+        {% if fetchitems %}
+        <br>
+        <h3>Expenses</h3>
+            {% for fetch in fetchitems %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ fetch.expenseitem_deets.budget.budget_name }}</td>
+                    <td>{{ fetch.expenseitem_deets.item_name }}</td>
+                    <td>{{ fetch.expenseitem_deets.catego.cat_name }}</td>
+                    <td>{{ fetch.expense_desc}}</td>
+                    <td>{{ fetch.expense_amount}}</td>
+                    <td>{{ fetch.expense_date}}</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+        <br>
+        <h3>All Expenses</h3>
+            {% for expense in expenses %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ expense.expenseitem_deets.budget.budget_name }}</td>
+                    <td>{{ expense.expenseitem_deets.item_name }}</td>
+                    <td>{{ expense.expenseitem_deets.catego.cat_name }}</td>
+                    <td>{{ expense.expense_desc}}</td>
+                    <td>{{ expense.expense_amount}}</td>
+                    <td>{{ expense.expense_date}}</td>
+                    <td><form action="{{ url_for('delete_expense', expense_id=expense.expense_id) }}" method="post">
+                        <button type="submit" class=" btn btn-success">Delete</button>
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    </form></td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+        </tbody>
+      </table>
+</div>
+
+{% endblock %}

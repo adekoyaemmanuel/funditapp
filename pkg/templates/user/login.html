@@ -1,0 +1,173 @@
+{% extends "user/onboardinglayout.html" %}
+
+{% block title %}
+<title>Login</title> 
+{% endblock title %}
+
+    {% block style %}
+    <style>
+        body{
+            background-color: #FBF2F2;
+            min-height: 50px;
+        }
+        
+         .f-area{
+				margin-top: 25px;
+				margin-left:90px;
+				width: 40%;
+			}
+        /* div{
+            border: 2px solid red;
+        } */
+        #loginimage{
+            background-color: #3ab26e;
+            min-height: 500px;
+            border-top-right-radius:20px;
+            border-bottom-right-radius:20px;
+        }
+        #saly{
+            margin-top: 45px;
+			margin-left: -80px;
+            width: 900px;
+            size:100%;
+        }
+        .f-area{
+				margin-top: 40px;
+				margin-left:90px;
+				width:80%;
+			}
+            a{
+              color:black;
+              text-decoration:none; 
+            }
+            
+        input, select, a:hover{
+            color:#3ab26e;
+            border-color: #3ab26e !important;
+            border-radius: 10px !important;
+            }
+
+        #language{
+            margin-left: 420px;
+        }
+
+        #shape{
+            background-image: url("/static/images/Shape.png");
+            background-size: 100%;
+            background-position: left;
+            background-repeat: no-repeat;
+            min-height: 120px;
+            margin-top: 100px;
+
+        }
+
+        #footerdesign{
+            background-color:white
+        }
+
+        #newsletters{
+            background-color: white;
+            border: 2px solid whitesmoke;
+            border-radius: 3px;
+            position: relative;
+            top:-65px;
+            width:80%;
+            margin:auto
+        }
+        
+    </style>
+    {% endblock style%}
+
+    {% block content %}
+    <br>
+    {% block navbutton %}
+    {% endblock navbutton %}
+        <div class="row">
+            <div class="col-md-6">
+                {% set m=get_flashed_messages(with_categories=True) %}
+                {% if m %}
+                {% for cat,msg in m %}
+                    {% if cat == "error" %}
+                    <div class="alert alert-danger noround">{{ msg }}</div>
+                    {% else %}
+                    <div class="alert alert-info noround">{{ msg }}</div>
+                    {% endif %}
+                {% endfor %}
+                {% endif %}
+                        <form action="" method="post" class="form">
+                        <h2 class="text-center my-4">WELCOME</h2>
+                        <div class="row f-area">
+                            <div class="col-md-12">
+                                <label for="email">Email Address</label>
+                                <input type="email" name="email" id="email" value="" class="form-control col-6 mb-3">
+                            </div>
+                            <div class="col-md-12">
+                                <label for="email">Password</label>
+                                <input type="password" name="pwd" id="pwd" value="" class="form-control col-6 mb-3">
+                            </div>
+    
+                            <div class="col-md-12">
+                                <p><input type="checkbox" name="terms" id="agree"> By Signing up, you agree to the <a href="#" style="text-decoration: underline; color: #3ab26e;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Terms of Service and Privacy Policies</a></p>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Terms and Conditions</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <ol>
+                                                <li>Account Creation and Use</li>
+                                                <p>To use our budget and expense tracker application, you will need to create an account. You agree to provide accurate, complete, and updated registration information. You are solely responsible for any activity that occurs on your account.</p>
+                                            
+                                                <li>Usage of the Application</li>
+                                                <p>You agree to use the application only for lawful purposes and in a manner that does not infringe on the rights of others or interfere with the normal operation of the application. We reserve the right to terminate or restrict your use of the application if you violate these Terms and Conditions.</p>
+                                            
+                                                <li>User Content</li>
+                                                <p>You retain all rights to any content you submit or post through the application. However, by submitting or posting content, you grant us a perpetual, irrevocable, worldwide, non-exclusive, royalty-free, and transferable license to use, copy, modify, distribute, and display such content in any form, medium, or technology now known or later developed.</p>
+                                            
+                                                <li>Privacy</li>
+                                                <p>Your privacy is important to us. Please review our Privacy Policy, which explains how we handle your personal information.</p>
+                                            
+                                            <li>Disclaimer of Warranties</li>
+                                            <p>The application is provided on an "as is" and "as available" basis. We make no representations or warranties of any kind, express or implied, as to the operation of the application or the information, content, materials, or products included in the application.</p>
+                                            
+                                            <li>Limitation of Liability</li>
+                                            <p>In no event will we be liable for any direct, indirect, incidental, special, consequential, or exemplary damages, including but not limited to, damages for loss of profits, goodwill, use, data, or other intangible losses.</p>
+                                            
+                                            <li>Changes to Terms and Conditions</li>
+                                            <p>We reserve the right to modify these Terms and Conditions at any time without notice. Your continued use of the application after any such changes constitutes your acceptance of the new Terms and Conditions.</p>
+                                            
+                                            <li>Governing Law</li>
+                                            <p>These Terms and Conditions are governed by and construed in accordance with the laws of the state in which the company is registered.</p>
+                                            
+                                            <p>Contact Information
+                                            If you have any questions about these Terms and Conditions, please contact us at support@funditapp.com.</p>
+                                            
+                                            <p>Last updated: 12/01/2024</p>
+                                            </ol>
+                                            
+                                        </div>
+                                        <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+
+                                <button class=" mt-3 btn btn-success col-12" id="but" disabled>Sign In</button>
+                                <p class="text-center">Don't have an account?<a href="/register" style="text-decoration: underline; color: #3ab26e;">Sign Up</a></p>
+                            </div>
+                        </div>
+                        
+                        <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+                    </form>
+            </div>
+            <div class="col-md-5" id="loginimage">
+                <img src="/static/images/saly.png" alt="" id="saly" height="100%" width="300px" class="img-fluid">
+            </div>
+        </div>
+    </div>
+{% endblock content %}

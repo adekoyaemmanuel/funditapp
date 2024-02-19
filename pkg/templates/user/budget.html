@@ -1,0 +1,102 @@
+{% extends "user/dashboardlayout.html" %}
+
+{% block title %}Budget{% endblock %}
+{% block budget %}{% endblock %}
+{% block pagetitle %} Create Budget{% endblock %}
+{% block mini %}{% endblock %}
+
+{% block content %} 
+<form action="/budget/" method="post" class="form" id="my-form">
+    <div class="row">
+        {% set m=get_flashed_messages(with_categories=True) %}
+        {% if m %}
+            {% for cat, msg in m %}
+                {% if cat == "error" %}
+                <div class="alert alert-danger noround">{{ msg }}</div>
+                {% else %}
+                <div class="alert alert-info noround">{{ msg }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        <div class="col-md-5">
+            <label for="budget_name" class="form-label">Budget Name</label>
+            <input type="text" name="budget_name" id="budget_name" value="" class="form-control" required> 
+        </div>
+        <div class="col-md-5">
+            <label for="current_income" class="form-label">Current Income</label>
+            <input type="number" name="current_income" id="current_income" value="" step="0.01" class="form-control" required>
+        </div>
+    </div>
+    <div class="row justify-space-around">
+        <div class="col-md-5">
+            <label for="start_date" class="form-label">Start Date</label>
+            <input type="date" name="start_date" id="start_date" value="" class="form-control">
+        </div>
+        <div class="col-md-5">
+            <label for="end_date" class="form-label">End Date</label>
+            <input type="date" name="end_date" id="end_date" value="" class="form-control">
+        </div>
+    </div>
+    <div id="item_fields">
+        <div class="row item_field">
+            <div class="col-md-10">
+                <label for="item_name" class="form-label">Item Name</label>
+                <input type="text" name="item_name[]" id="item_name" value="" class="form-control">
+            </div>
+            <div class="col-md-3">
+                <label for="item_category" class="form-label">Item Category</label>
+                <select name="item_category[]" id="item_category" class="form-control" required>
+                    <option value="" class="form-control">select...</option>
+                    {% for cat in category %}
+                    <option value="{{ cat.cat_id }}">{{ cat.cat_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="item_status" class="form-label">Item Status</label>
+                <select name="item_status[]" id="item_status" class="form-control" required>
+                    <option value="" class="form-control">select...</option>
+                    <option value="1">Enable</option>
+                    <option value="0">Disable</option>  
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="item_amount" class="form-label">Item Amount</label>
+                <input type="text" name="item_amount[]" id="item_amount" value="" class="form-control" step="0.01" required>
+            </div>
+        </div>
+    </div> 
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <button class="btn m-2 btn-success px-3" type="button" id="add_item">Add Item</button>
+    <button class="btn m-2 btn-success px-3">Create Budget</button>
+</form>
+
+{% endblock %}
+
+{% block table %}
+<div >
+    <h2>Budget</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Budget Name</th>
+                <th>Budget Amount</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for budget in budgets %}
+        <tr>
+            <td>{{ budget.budget_name }}</td>
+            <td>{{ budget.current_income }}</td>
+            <td>{{ budget.start_date}}</td>
+            <td>{{ budget.end_date }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="/budgetreport/" style="color:#3ab26e; text-decoration:underline;">see more</a>
+</div>
+{% endblock %}
+
