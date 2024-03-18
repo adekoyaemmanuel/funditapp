@@ -1,0 +1,58 @@
+{% extends "user/dashboardlayout.html" %}
+
+{% block title %}Edit Expense{% endblock %}
+
+<div class="row">
+    <div class="col-md-8">
+        <h4 class="text-center">{% block pagetitle %}Edit Expense{% endblock %}</h4>
+    </div>
+    {% block buttons %}
+    <div class="col-md-2">
+        <a type="button" href="/budgetreport/" class="btn btn-success"> All Budgets</a>
+    </div>
+    <div class="col-md-2">
+        <a type="button" href="/report/" class="btn btn-success">All Expenses</a>
+    </div>
+    {% endblock %}
+</div>
+
+{% block content %} 
+<div>
+    <form action="" method="post" class="form" id="expense-form">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="row">
+            <div class="col-md-5">
+                <label for="budgetname" class="form-label">From Budget</label>
+                <select name="budgetname" id="budgetname" class="form-control" required>
+                    <option value="{{expens.expenseitem_deets.budget.budget_id}}">{{expens.expenseitem_deets.budget.budget_name}}</option>
+                    {% for budget in budgetss %}
+                    <option value="{{ budget.budget_id }}">{{ budget.budget_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-5">
+                <label for="itemname" class="form-label">Item Name</label>
+                <select name="itemname" id="itemname" class="form-control" required>
+                    <option value="{{expens.expenseitem_deets.item_id}}">{{expens.expenseitem_deets.item_name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <label for="amt" class="form-label">Expense Amount</label>
+                <input type="text" name="amt" id="amt" value="{{ expens.expense_amount }}" class="form-control">
+            </div>
+            <div class="col-md-4">
+                <label for="desc" class="form-label">Expense Description</label>
+                <input type="text" name="desc" id="desc" value="{{ expens.expense_desc }}" class="form-control">
+            </div>
+            <div class="col-md-3">
+                <label for="dat" class="form-label">Expense Date</label>
+                <input type="date" name="dat" id="dat" value="{{ expens.expense_date }}" class="form-control" required>
+            </div>
+        </div>
+        <button class="btn m-2 btn-success px-3" type="submit">Submit</button>
+    </form>
+</div>
+
+{% endblock %}

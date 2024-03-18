@@ -1,0 +1,44 @@
+                {% extends "/admin/admin_layout.html" %}
+                <main>
+                    {% block admincontent %}
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Dashboard</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">Dashboard</li>
+                        </ol>
+                        <h3 class="text-center">Create New Category</h3>
+                        <form action="" method="post" class="form" id="expense-form">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="cat" class="form-label">Category Name</label>
+                                    <input type="text" name="cat" id="cat" value="" class="form-control">
+                                </div>
+                            </div>
+                            <button class="btn m-2 btn-success px-3 col-12" type="submit">create</button>
+                        </form>
+                            <br><br>
+                        <div>
+                            <h2>All Categories</h2>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Category Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for category in allcategories %}
+                                <tr>
+                                    <td>{{ loop.index }}</td>
+                                    <td>{{ category.cat_name }}</td>
+                                    <td><a href="{{url_for('delete_category', category_id=category.cat_id)}}" class="btn btn-sm btn-danger" type="submit" name="delete" value="{{ category.cat_id }}">Delete</a></td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    {% endblock admincontent %}
+                </main>
+                

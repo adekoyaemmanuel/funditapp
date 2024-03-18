@@ -1,0 +1,99 @@
+{% extends "user/dashboardlayout.html" %}
+
+{% block title %}Budgets{% endblock %}
+
+{% block pagetitle %}Budget Reports{% endblock %}
+    
+    {% block buttons %}
+    <div class="col-md-2">
+        <a type="button" href="/budgetreport/" class="btn btn-success"> All Budgets</a>
+    </div>
+    <div class="col-md-2">
+        <a type="button" href="/report/" class="btn btn-success">All Expenses</a>
+    </div>
+    {% endblock %}
+
+    {% block mini %} {% endblock %}
+
+
+{% block content %} 
+<div>
+    
+    <form action="" method="post">
+        <label for="budgetname" class="form-label" style="color:red;">**Kindly select Budget to get more details about it</label>
+        <select name="budgetname" id="budgetname" class="form-control" required>
+            <option value="">select...</option>
+            {% for budget in budgets %}
+            <option value="{{ budget.budget_id }}">{{ budget.budget_name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <button type="submit" class="btn btn-success"> submit </button>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    </form>
+    <br>
+    {% if budgets: %}
+    <table id="my-table" class="table table-striped">
+        {% if budgetitems %}
+        <h2>Budget Items</h2>
+        <thead>
+          <tr>
+            <th>S/N</th>
+            <th>From Budget</th>
+            <th>Item Name</th>
+            <th>Item status</th>
+            <th>Item amount</th>
+            <th>Item category</th>
+            <th>Budget Start Date</th>
+            <th>Budget End Date</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for budge in budgetitems %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ budge.budget.budget_name }}</td>
+                    <td>{{ budge.item_name }}</td>
+                    <td>{{ budge.item_status }}</td>
+                    <td>{{ budge.item_amount }}</td>
+                    <td>{{ budge.catego.cat_name }}</td>
+                    <td>{{ budge.budget.start_date}}</td>
+                    <td>{{ budge.budget.end_date}}</td>
+                    <td><form action="{{ url_for('delete_item', item_id=budge.item_id) }}" method="post">
+                        <button type="submit" class="btn btn-success">Delete</button>
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    </form></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        {% else %}
+        <h3>All Budgets</h3>
+        <thead>
+            <tr>
+              <th>S/N</th>
+              <th>Budget Name</th>
+              <th>Budget Amount</th>
+              <th>Budget Start Date</th>
+              <th>Budget End Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for budget in budgets %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ budget.budget_name }}</td>
+                    <td>{{ budget.current_income }}</td>
+                    <td>{{ budget.start_date }}</td>
+                    <td>{{ budget.end_date }}</td>
+                    <td><a href="{{url_for('delete_budget', budget_id=budget.budget_id)}}" class="btn btn-sm btn-danger" type="submit" name="delete" value="{{ budget.budget_id }}">Delete</a></td><td><a href="{{url_for('update_budget', budget_id=budget.budget_id )}}" class="btn btn-sm btn-success" type="submit" name="edit" value="{{ budget.budget_id }}">Edit</a></td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+        </tbody>
+      </table>
+      {% else: %}
+      <p class="alert alert-danger mt-3">Sorry, no budget has been created</p>
+      {% endif %}
+</div>
+
+{% endblock %}

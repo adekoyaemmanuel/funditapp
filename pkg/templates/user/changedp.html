@@ -1,0 +1,28 @@
+{% extends "user/dashboardlayout.html" %}
+{% block pagetitle %}Change Your Profile Picture{% endblock %}
+{% block content %}
+<div class="content" style="background-color: white;padding:3em">
+    <!-- <h3>Change Your Profile Picture</h3> -->
+  <form enctype="multipart/form-data" method="post">
+   
+  <div class="mb-3">
+      <label for="dp">Upload a Profile Picture</label>
+      <input id="dp" name="dp" required type="file">
+  
+  </div>
+  <div class="mb-3"> 
+    <input class="btn btn-dark noround" id="btnupload" name="btnupload" type="submit" value="Upload Picture">
+    
+  </div>
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  </form></div>
+
+  </div>
+
+  {% endblock content %}
+
+  
+
+
+<!-- end more content-->
+  

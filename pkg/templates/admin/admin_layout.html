@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Fundit - Admin</title>
+        <link href='/static/vendor/bootstrap/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+        <link href="/static/admin/css/styles.css" rel="stylesheet" />
+        <link href="/static/admin/fa/css/all.css" rel="stylesheet">
+    </head>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-success">
+            <!-- Navbar Brand-->
+            <a class="navbar-brand ps-3 " href="/admin/dashboard/">
+                <img src="/static/images/logo.png" width="130" height="80%" alt="">
+            </a>
+            <!-- Sidebar Toggle-->
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+            <!-- Navbar Search-->
+            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+                <div class="input-group">
+                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+                    <button class="btn btn-success" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+                </div>
+            </form>
+            <!-- Navbar-->
+            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><hr class="dropdown-divider"/></li>
+                        <li><a class="dropdown-item" href="/admin/logout/">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-light" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading">Manage Users</div>
+                            <a class="nav-link" href="/admin/dashboard/">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Dashboard
+                            </a>    
+                            <div class="sb-sidenav-menu-heading">Users</div>
+                            <a class="nav-link" href="/alladmin">
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                Admin Users
+                            </a>
+                            <a class="nav-link" href="/allusers">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Registered Users
+                            </a>
+                        </div>
+                    </div>
+                    <div class="sb-sidenav-footer">
+                        <div class="small">Logged in as:</div>
+                        Super Admin
+                    </div>
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <br>
+                <main>
+                    {% set m=get_flashed_messages(with_categories=True) %}
+                        {% if m %}
+                        {% for cat,msg in m %}
+                            {% if cat == "error" %}
+                            <div class="alert alert-danger noround">{{ msg }}</div>
+                            {% else %}
+                            <div class="alert alert-info noround">{{ msg }}</div>
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+
+                    {% block admincontent %}
+                    {% endblock %}
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted" style="color:#3ab26e !important; text-decoration:underline;">Copyright &copy; FunditApp 2024</div>
+                            <div>
+                                <span style="color:#3ab26e; text-decoration:underline;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Terms of Service & Privacy Policy </span>
+                            </div>
+                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Terms and Conditions</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <ol>
+                                            <li>Account Creation and Use</li>
+                                            <p>To use our budget and expense tracker application, you will need to create an account. You agree to provide accurate, complete, and updated registration information. You are solely responsible for any activity that occurs on your account.</p>
+                                        
+                                            <li>Usage of the Application</li>
+                                            <p>You agree to use the application only for lawful purposes and in a manner that does not infringe on the rights of others or interfere with the normal operation of the application. We reserve the right to terminate or restrict your use of the application if you violate these Terms and Conditions.</p>
+                                        
+                                            <li>User Content</li>
+                                            <p>You retain all rights to any content you submit or post through the application. However, by submitting or posting content, you grant us a perpetual, irrevocable, worldwide, non-exclusive, royalty-free, and transferable license to use, copy, modify, distribute, and display such content in any form, medium, or technology now known or later developed.</p>
+                                        
+                                            <li>Privacy</li>
+                                            <p>Your privacy is important to us. Please review our Privacy Policy, which explains how we handle your personal information.</p>
+                                        
+                                        <li>Disclaimer of Warranties</li>
+                                        <p>The application is provided on an "as is" and "as available" basis. We make no representations or warranties of any kind, express or implied, as to the operation of the application or the information, content, materials, or products included in the application.</p>
+                                        
+                                        <li>Limitation of Liability</li>
+                                        <p>In no event will we be liable for any direct, indirect, incidental, special, consequential, or exemplary damages, including but not limited to, damages for loss of profits, goodwill, use, data, or other intangible losses.</p>
+                                        
+                                        <li>Changes to Terms and Conditions</li>
+                                        <p>We reserve the right to modify these Terms and Conditions at any time without notice. Your continued use of the application after any such changes constitutes your acceptance of the new Terms and Conditions.</p>
+                                        
+                                        <li>Governing Law</li>
+                                        <p>These Terms and Conditions are governed by and construed in accordance with the laws of the state in which the company is registered.</p>
+                                        
+                                        <p>Contact Information
+                                        If you have any questions about these Terms and Conditions, please contact us at support@funditapp.com.</p>
+                                        
+                                        <p>Last updated: 12/01/2024</p>
+                                        </ol>
+                                        
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script> 
+        <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="/static/admin/js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="/static/admin/assets/demo/chart-area-demo.js"></script>
+        <script src="/static/admin/assets/demo/chart-bar-demo.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+        <script src="/static/admin/js/datatables-simple-demo.js"></script>
+    </body>
+</html>

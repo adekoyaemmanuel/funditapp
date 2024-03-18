@@ -1,0 +1,43 @@
+{% extends "user/dashboardlayout.html" %}
+
+{% block pagetitle %}Edit Your Profile{% endblock %}
+{% block content %}
+
+                
+<div class="content" style="background-color: white;padding:3em">
+    <form enctype="multipart/form-data" method="post">
+     
+   <div class="form-group row">
+    <div class="col-md-6 mb-3">
+        <label for="fname">FirstName</label>
+        <input class="form-control border-dark noround" id="fname" name="fname" required type="text" value="{{ deets.user_fname }}" >
+    
+    </div>
+    <div class="col-md-6 mb-3">
+        <label for="lname">LastName</label>
+        <input class="form-control border-dark noround" id="lname" name="lname" required type="text" value="{{ deets.user_lname }}" >
+    
+    </div>
+   </div>
+   <div class="form-group row">
+    <div class="col-md-6 mb-3">
+        <label for="email">Email</label>
+        <input class="form-control border-dark noround" id="email" name="email" required type="email" value="{{ deets.user_email }}">
+    
+    </div>
+
+   </div>
+   <hr>
+
+   <div class="mb-3">
+
+      <input class="btn custom-btn noround" id="btnsubmit" name="btnsubmit" type="submit" value="Update Profile!">
+      
+    </div>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    </form>
+ </div>
+
+  </div>
+{% endblock content %}
+

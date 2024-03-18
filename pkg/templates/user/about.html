@@ -1,0 +1,134 @@
+    {% extends "user/onboardinglayout.html" %}
+        {% block style %}
+		<style type="text/css">
+		
+        body{
+            background-color: #FBF2F2;
+            min-height: 50px;
+        }
+        
+        /* div{
+            border: 2px solid red;
+        } */
+        #banner{
+            background-color: #3ab26e;
+            background-repeat: none;
+            background-size: cover;
+            min-height: 600px;
+            margin-top: 35px;
+
+        }
+
+        #bannerimage{
+            position: absolute;
+            top: 120px;
+            left: 750px;
+            
+        }
+
+        #bannerimage1{
+            position: absolute;
+            top:200px;
+            left:980px;
+        }
+
+        #bannertext{
+            color: white;
+            position:relative;
+            top:130px;
+            left: 100px;
+        }
+
+        .about{
+            background-color: white;
+        }
+
+        .about img{
+           height: 500px;
+        }
+
+        a{
+              color:black;
+              text-decoration:none; 
+            }
+            
+        input, select, a:hover{
+            color:#3ab26e;
+            border-color: #3ab26e !important;
+            border-radius: 10px !important;
+            }
+
+        #shape{
+            background-image: url("/static/images/Shape.png");
+            background-size: 100%;
+            background-position: left;
+            background-repeat: no-repeat;
+            min-height: 120px;
+            margin-top: 100px;
+
+        }
+
+        #footerdesign{
+            background-color:white
+        }
+
+        #newsletters{
+            background-color: white;
+            border: 2px solid whitesmoke;
+            border-radius: 3px;
+            position: relative;
+            top:-65px;
+            width:80%;
+            margin:auto
+        }
+
+		</style>
+        {% endblock %}
+
+	
+            {% block content %}
+            <!-- banner section -->
+            <div class="row" id="banner">
+                <div class="col-md-5" id="bannertext">
+                        <h1>About Us</h1>
+                        <br>
+                        <h5>Fundit Budgeting your go-to platform for simplifying the way you manage your money. At Fundit, we believe in providing practical solutions to make financial management effortless, empowering you to achieve your financial goals without unnecessary complexity.</h5>
+                        <br>
+                        <a href="/register/" class="btn btn-light text-success mt-3">Get Started</a>
+                </div>
+                <div class="col-md-7 d-none d-lg-block ban">
+                    <span id="bannerimage"><img src="/static/images/Body.png" alt="" ></span> 
+                    <span id="bannerimage1"><img src="/static/images/Body1.png" alt=""></span>
+                </div>
+            </div>
+
+            <div class="row my-5 about" style="width:80%; margin: auto;">
+                <div class="col-md-6 p-5">
+                    <h1>Our Mission</h1>
+                    <h5>Our mission is to revolutionize the way you manage your money, making financial wellness accessible to everyone. Here's a glimpse into who we are and why Fundit is your trusted partner in achieving financial freedom.</h5>
+                </div>
+                <div class="col-md-6 ">
+                    <img src="/static/images/mission.png" alt="" width=100% class="img-fluid">
+                </div>
+            </div>
+            <div class="row my-5 about" style="width:80%; margin: auto;">
+                <div class="col-md-6 p-5 ">
+                    <h1>Our Vision</h1>
+                    <h5>At Fundit, we envision a world where individuals have the tools and knowledge to take control of their finances. We believe that financial well-being is a fundamental right, and we are committed to providing a platform that empowers users to make informed decisions about their money.</h5>
+                </div>
+                <div class="col-md-6">
+                    <img src="/static/images/vision.png" alt="" width=100% class="img-fluid">
+                </div>
+            </div>
+            <div class="row my-5 about" style="width:80%; margin: auto;">
+                <div class="col-md-6 p-5">
+                    <h1>What Set Us Apart</h1>
+                    <h5>User-Centric Approach: Fundit is designed with you in mind. Our user-centric approach ensures that our features and resources cater to the diverse needs of our users, whether you're a recent graduate, a family manager, a freelancer, or a seasoned investor.</h5>
+                </div>
+                <div class="col-md-6 ">
+                    <img src="/static/images/differentiate.png" alt="" width=100% height="70px" class="img-fluid">
+                </div>
+            </div>
+            
+        </div>
+        {% endblock %}
